@@ -3,7 +3,6 @@
     2743
 */
 #include <iostream>
-#include <vector>
 using namespace std;
 
 const int inf = (1 << 30) - 1;
