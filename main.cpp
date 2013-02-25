@@ -1,5 +1,5 @@
 /*
-    Комаров Артём
+    Komarov Artyom
     2743
 */
 #include <iostream>
@@ -12,8 +12,8 @@ int n, m, v, u, w, a[50][50], mask, ans;
 int main() {
     cin >> n >> m;
     if(n == 1) {
+        // Special case
         cout << 0;
-        // вырожденный случай
         return 0;
     }
     for(int i = 0; i < m; i++) {
@@ -22,7 +22,7 @@ int main() {
         a[u][v] = a[v][u] = w;
     }
 ////////////////////////////////////////////////////////
-    // База динамики, заполнение подмножеств бесконечностями, количество масок 2^n
+    //Base dynamics, mask = 2^n
     mask = 1 << n;
     int dp[50][mask];
     for(int i = 0; i < n; ++i)
@@ -30,7 +30,7 @@ int main() {
             dp[i][j] = inf;
     dp[0][1] = 0;
 ////////////////////////////////////////////////////////
-    // Динамика по подмножествам
+    // Dynamics on subsets
     for(int i = 0; i < n; i++)
         for(int j = 1; j < mask; j++)
             if(dp[i][j] != inf)
@@ -38,7 +38,7 @@ int main() {
                     if(a[i][k] != 0 && (j | (1 << k) != j))
                         dp[k][j | (1 << k)] = min(dp[k][j | (1 << k)], dp[i][j] + a[i][k]);
 ///////////////////////////////////////////////////////
-    // Нахождение ответа и его вывод
+    // Finding an answer
     ans = inf;
     for(int i = 0; i < n; i++)
         if(a[i][0] != 0)
@@ -47,3 +47,14 @@ int main() {
     else "Cycle not found";
     return 0;
 }
+/*
+Test
+4 6
+1 2 1
+2 3 2
+3 4 1
+4 1 2
+1 3 1
+2 4 1
+*/
+
